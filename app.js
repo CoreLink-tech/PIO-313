@@ -313,7 +313,7 @@ function renderLessonView(station){
 
   // Intro
   const introSec = el("div", "lesson-section");
-  introSec.innerHTML = `<h2><span class="icon" style="width:18px;height:18px;color:var(--clay-deep)">${ICONS.book}</span> Introduction</h2>`;
+  introSec.innerHTML = `<h2><span class="icon">${ICONS.book}</span> Introduction</h2>`;
   station.lesson.intro.forEach(p => introSec.appendChild(el("p", null, p)));
   body.appendChild(introSec);
 
