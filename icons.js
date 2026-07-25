@@ -80,6 +80,18 @@ const ICONS = {
     <path d="M12 14v3M9 20.5h6M10 20.5v-2.7c0-.7.5-1 1.2-1h1.6c.7 0 1.2.3 1.2 1v2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
   </svg>`,
 
+  cards: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="6.5" y="3.5" width="12" height="15" rx="1.6" transform="rotate(-6 6.5 3.5)" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+    <rect x="5" y="5.5" width="14" height="15" rx="1.6" stroke="currentColor" stroke-width="1.75"/>
+    <path d="M8.5 10h7M8.5 13.5h4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </svg>`,
+
+  graduation: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2.5 9.5 12 5l9.5 4.5L12 14 2.5 9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M6.5 11.6v4c0 1.4 2.5 2.9 5.5 2.9s5.5-1.5 5.5-2.9v-4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M21.5 9.5V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>`,
+
   /* ---------- Badge frame (48x48) — wraps a topic glyph ---------- */
 
   badgeFrame: (innerPathSVG, locked) => `

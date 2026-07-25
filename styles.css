@@ -415,3 +415,100 @@ main{ flex:1; }
 button:focus-visible, .station-node__btn:focus-visible, textarea:focus-visible{
   outline:2px solid var(--clay); outline-offset:2px;
 }
+
+/* ==========================================================================
+   STATION PATH VIEW — per-station part checklist
+   ========================================================================== */
+.station-path-body{ max-width:680px; margin:0 auto; padding:10px 24px 60px; }
+
+.path-progress-banner{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  background:var(--cream-2); border:1px solid var(--cream-edge); border-radius:var(--radius);
+  padding:16px 20px; margin-bottom:22px; flex-wrap:wrap;
+}
+.path-progress-banner__text{ color:var(--ink); font-size:.95rem; }
+.path-progress-banner__text strong{ font-family:var(--font-mono); color:var(--sun-deep); }
+
+.part-list{ display:flex; flex-direction:column; gap:10px; }
+.part-row{
+  display:flex; align-items:center; gap:14px;
+  background:#fff; border:1px solid var(--cream-edge); border-radius:var(--radius-sm);
+  padding:14px 16px;
+}
+.part-row.locked{ opacity:.6; }
+.part-row.done{ border-color:var(--ok); background:rgba(63,125,80,0.06); }
+.part-row.unlocked:not(.done){ border-color:var(--sun-deep); }
+.part-row__icon{
+  width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--cream-2); color:var(--stone);
+}
+.part-row__icon .icon{ width:19px; height:19px; }
+.part-row.unlocked:not(.done) .part-row__icon{ color:var(--sun-deep); background:rgba(198,137,46,0.12); }
+.part-row.done .part-row__icon{ color:#fff; background:var(--ok); }
+.part-row__text{ flex:1; min-width:0; }
+.part-row__num{ font-family:var(--font-mono); font-size:.68rem; color:var(--ink-2); text-transform:uppercase; letter-spacing:.5px; }
+.part-row__title{ font-weight:600; color:var(--ink); font-size:.95rem; }
+.part-row__btn{
+  display:flex; align-items:center; gap:6px; flex-shrink:0;
+  background:transparent; border:1px solid var(--cream-edge); color:var(--clay-deep);
+  padding:8px 14px; border-radius:999px; font-size:.82rem; font-weight:700;
+}
+.part-row__btn .icon{ width:13px; height:13px; }
+.part-row__btn:hover{ border-color:var(--clay); }
+.exam-row{ margin-top:8px; border-style:dashed; border-width:2px; }
+.exam-row.unlocked{ border-style:solid; }
+
+/* ==========================================================================
+   FLASHCARDS VIEW
+   ========================================================================== */
+.flashcards-wrap{ max-width:560px; margin:0 auto; padding:34px 22px 60px; text-align:center; }
+.flashcards-title{ font-size:1.4rem; color:var(--ink); margin-bottom:4px; }
+.flashcard-counter{ font-family:var(--font-mono); font-size:.8rem; color:var(--ink-2); margin-bottom:10px; }
+.flashcard-dots{ display:flex; justify-content:center; gap:6px; margin-bottom:26px; flex-wrap:wrap; }
+.flashcard-dot{ width:7px; height:7px; border-radius:50%; background:var(--cream-edge); }
+.flashcard-dot.seen{ background:var(--sun); }
+.flashcard-dot.active{ background:var(--clay-deep); width:9px; height:9px; }
+
+.flashcard{
+  perspective:1400px; height:280px; cursor:pointer; margin-bottom:26px;
+}
+.flashcard__inner{
+  position:relative; width:100%; height:100%;
+  transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  transform-style:preserve-3d;
+}
+.flashcard.flipped .flashcard__inner{ transform:rotateY(180deg); }
+.flashcard__face{
+  position:absolute; inset:0; backface-visibility:hidden;
+  border-radius:var(--radius); border:1px solid var(--cream-edge);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:28px 26px; box-shadow:0 14px 32px -18px rgba(43,36,22,0.3);
+}
+.flashcard__front{ background:var(--green); color:#fff; }
+.flashcard__icon{ width:26px; height:26px; color:rgba(255,255,255,0.65); margin-bottom:14px; }
+.flashcard__front-text{ font-family:var(--font-display); font-weight:600; font-size:1.25rem; line-height:1.4; }
+.flashcard__hint{ margin-top:16px; font-size:.76rem; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:.6px; }
+.flashcard__back{
+  background:#fff; color:var(--ink); transform:rotateY(180deg);
+  overflow-y:auto; align-items:flex-start; text-align:left;
+}
+.flashcard__back-text{ font-size:1rem; line-height:1.65; }
+
+.flashcard-nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.flashcard-quiz-btn{ margin:0 !important; flex:1; }
+
+/* ==========================================================================
+   THEORY QUESTION (final exam)
+   ========================================================================== */
+.theory-hint{ font-size:.82rem; color:var(--ink-2); font-style:italic; margin-bottom:14px !important; }
+.theory-input{ min-height:150px; }
+
+/* ---------- Responsive additions ---------- */
+@media (max-width:640px){
+  .station-path-body{ padding-left:16px; padding-right:16px; }
+  .flashcards-wrap{ padding-left:16px; padding-right:16px; }
+  .flashcard{ height:320px; }
+  .path-progress-banner{ flex-direction:column; align-items:stretch; }
+  .path-progress-banner .btn-primary{ justify-content:center; }
+}
