@@ -95,11 +95,15 @@ button{ font-family:inherit; cursor:pointer; }
 
 main{ flex:1; }
 .footer{
-  padding:22px; text-align:center; color:var(--ink-2);
+  padding:22px 22px 26px; text-align:center; color:var(--ink-2);
   font-size:.8rem; border-top:1px solid var(--cream-edge);
-  display:flex; align-items:center; justify-content:center; gap:8px;
 }
+.footer__brand{ display:flex; align-items:center; justify-content:center; gap:8px; }
 .footer .icon{ width:14px; height:14px; color:var(--green); }
+.footer__credits{
+  margin-top:10px; font-size:.72rem; line-height:1.6; color:var(--stone);
+  max-width:480px; margin-left:auto; margin-right:auto;
+}
 
 /* ---------- XP toast ---------- */
 .xp-toast{

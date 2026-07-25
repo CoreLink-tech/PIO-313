@@ -155,8 +155,8 @@ function renderTopbar(){
   const brand = el("div", "topbar__brand");
   brand.innerHTML = `
     <span class="icon topbar__brand-mark">${ICONS.leaf}</span>
-    <span class="topbar__brand-text">Environmental Physiology Trail
-      <small>D/PIO 313 &middot; Field Guide</small>
+    <span class="topbar__brand-text">300 Level Exam Prep
+      <small>Gamified Course Trails</small>
     </span>`;
   brand.style.cursor = "pointer";
   brand.addEventListener("click", () => navigate({ view: "courses" }));
@@ -180,7 +180,13 @@ function renderTopbar(){
 
 function renderFooter(){
   const f = el("div", "footer");
-  f.innerHTML = `<span class="icon">${ICONS.leaf}</span> Powered by ZenLink Tech`;
+  f.innerHTML = `
+    <div class="footer__brand"><span class="icon">${ICONS.leaf}</span> Powered by ZenLink Tech</div>
+    <div class="footer__credits">
+      With appreciation to the lecturers, course coordinators, and academic leaders of the 300 Level Physiology class.<br>
+      Course notes are sourced from PDFs shared in the Exam Prep group.
+    </div>
+  `;
   return f;
 }
 
