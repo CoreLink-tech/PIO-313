@@ -98,7 +98,7 @@ const ICONS = {
   <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="badge-svg${locked ? ' is-locked' : ''}">
     <path d="M32 3 58 17v30L32 61 6 47V17Z" class="badge-shell" stroke="currentColor" stroke-width="2"/>
     <path d="M32 8 53 19.5v25L32 56 11 44.5v-25Z" class="badge-inner" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
-    <g transform="translate(16,16)">${innerPathSVG}</g>
+    <g transform="translate(16,16)">${innerPathSVG.replace('<svg ', '<svg width="32" height="32" ')}</g>
   </svg>`,
 
   /* ---------- Topic glyphs (32x32 viewBox, used inside badgeFrame / station nodes) ---------- */

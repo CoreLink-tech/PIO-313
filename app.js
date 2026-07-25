@@ -5,6 +5,36 @@
 
 const STORAGE_KEY = "envphys_progress_v2";
 
+/* ---------- Course catalog ----------
+   Only one course is live right now (Environmental Physiology, wired up
+   to the STATIONS data from data.js). More courses get added here later —
+   each just needs its own id/stations array; the picker and progress
+   system already key everything off course id, so nothing else about
+   this file has to change to add course #2. */
+
+const COURSES = [
+  {
+    id: "envphys",
+    code: "D/PIO 313",
+    title: "Environmental Physiology",
+    tagline: "Twelve stations on how the environment shapes the body, and how the body shapes it back.",
+    icon: "foundations",
+    available: true,
+    stations: STATIONS,
+  },
+  {
+    id: "coming-soon",
+    code: null,
+    title: "More courses",
+    tagline: "New courses land here as they're built.",
+    icon: null,
+    available: false,
+    stations: [],
+  },
+];
+
+function getCourse(id){ return COURSES.find(c => c.id === id); }
+
 /* ---------- State ---------- */
 
 function defaultState(){
@@ -80,7 +110,7 @@ function firstUnclearedPart(station){
 //  { view: 'part-quiz', stationId, partIndex }
 //  { view: 'final-exam', stationId }
 
-let route = { view: "map" };
+let route = { view: "courses" };
 
 function navigate(next){
   route = next;
@@ -99,7 +129,9 @@ function render(){
   appEl.appendChild(renderTopbar());
   const main = document.createElement("main");
 
-  if(route.view === "map"){
+  if(route.view === "courses"){
+    main.appendChild(renderCoursesView());
+  } else if(route.view === "map"){
     main.appendChild(renderMapView());
   } else if(route.view === "station-path"){
     main.appendChild(renderStationPathView(getStation(route.stationId)));
@@ -127,7 +159,7 @@ function renderTopbar(){
       <small>D/PIO 313 &middot; Field Guide</small>
     </span>`;
   brand.style.cursor = "pointer";
-  brand.addEventListener("click", () => navigate({ view: "map" }));
+  brand.addEventListener("click", () => navigate({ view: "courses" }));
 
   const stats = el("div", "topbar__stats");
   const level = xpLevel(state.xp);
@@ -181,8 +213,68 @@ function confirmReset(){
    MAP VIEW (unchanged trail — station click now goes to station-path)
    ========================================================================== */
 
+/* ==========================================================================
+   COURSES VIEW — pick a course; only Environmental Physiology is live
+   ========================================================================== */
+
+function renderCoursesView(){
+  const wrap = el("div");
+
+  const hero = el("div", "map-hero");
+  hero.innerHTML = `
+    <span class="icon">${ICONS.book}</span>
+    <h1>Choose a Course</h1>
+    <p>Pick a course to start, or pick up where you left off. Progress is saved per course.</p>
+  `;
+  wrap.appendChild(hero);
+
+  const grid = el("div", "course-grid");
+
+  COURSES.forEach(course => {
+    if(!course.available){
+      const card = el("div", "course-card course-card--locked");
+      card.innerHTML = `
+        <div class="course-card__icon"><span class="icon">${ICONS.lock}</span></div>
+        <div class="course-card__title">${course.title}</div>
+        <div class="course-card__tagline">${course.tagline}</div>
+      `;
+      grid.appendChild(card);
+      return;
+    }
+
+    const total = course.stations.length;
+    const done = course.stations.filter(s => isStationDone(s.id)).length;
+
+    const card = el("div", "course-card");
+    card.innerHTML = `
+      <div class="course-card__icon"><span class="icon">${ICONS.topic[course.icon]}</span></div>
+      <div class="course-card__code">${course.code}</div>
+      <div class="course-card__title">${course.title}</div>
+      <div class="course-card__tagline">${course.tagline}</div>
+      <div class="course-card__progress">
+        <div class="course-card__progress-track"><div class="course-card__progress-fill" style="width:${total ? Math.round((done/total)*100) : 0}%"></div></div>
+        <span>${done} / ${total} stations complete</span>
+      </div>
+    `;
+    const btn = el("button", "btn-primary course-card__btn");
+    btn.innerHTML = `${done > 0 ? "Continue" : "Start course"} <span class="icon">${ICONS.arrowRight}</span>`;
+    btn.addEventListener("click", () => navigate({ view: "map" }));
+    card.appendChild(btn);
+    card.addEventListener("click", (e) => { if(e.target !== btn && !btn.contains(e.target)) navigate({ view: "map" }); });
+    grid.appendChild(card);
+  });
+
+  wrap.appendChild(grid);
+  return wrap;
+}
+
 function renderMapView(){
   const wrap = el("div");
+  const backLink = el("button", "back-to-courses");
+  backLink.innerHTML = `<span class="icon">${ICONS.arrowLeft}</span>All courses`;
+  backLink.addEventListener("click", () => navigate({ view: "courses" }));
+  wrap.appendChild(backLink);
+
   const hero = el("div", "map-hero");
   hero.innerHTML = `
     <span class="icon">${ICONS.map}</span>
