@@ -18,9 +18,18 @@ const COURSES = [
     code: "D/PIO 313",
     title: "Environmental Physiology",
     tagline: "Twelve stations on how the environment shapes the body, and how the body shapes it back.",
-    icon: "foundations",
+    icon: "topic.foundations",
     available: true,
     stations: STATIONS,
+  },
+  {
+    id: "sportnutrition",
+    code: "TBD",
+    title: "Sport Nutrition",
+    tagline: "Twelve stations on fueling, supplementing, and recovering for athletic performance.",
+    icon: "course.dumbbell",
+    available: true,
+    stations: SN_STATIONS,
   },
   {
     id: "coming-soon",
@@ -32,6 +41,15 @@ const COURSES = [
     stations: [],
   },
 ];
+
+function resolveIcon(dottedPath){
+  const [ns, key] = dottedPath.split(".");
+  return ICONS[ns][key];
+}
+function courseIdForStation(stationId){
+  const c = COURSES.find(c => c.stations.some(s => s.id === stationId));
+  return c ? c.id : COURSES[0].id;
+}
 
 function getCourse(id){ return COURSES.find(c => c.id === id); }
 
@@ -69,9 +87,9 @@ function saveState(){
 function xpLevel(xp){ return Math.floor(xp / 100) + 1; }
 function xpIntoLevel(xp){ return xp % 100; }
 
-function isStationUnlocked(index){
+function isStationUnlocked(stations, index){
   if(index === 0) return true;
-  const prev = STATIONS[index - 1];
+  const prev = stations[index - 1];
   return !!(state.completed[prev.id] && state.completed[prev.id].passed);
 }
 function isStationDone(id){
@@ -118,7 +136,13 @@ function navigate(next){
   render();
 }
 
-function getStation(id){ return STATIONS.find(s => s.id === id); }
+function getStation(id){
+  for(const c of COURSES){
+    const s = c.stations.find(s => s.id === id);
+    if(s) return s;
+  }
+  return null;
+}
 
 /* ---------- Root render ---------- */
 
@@ -132,7 +156,7 @@ function render(){
   if(route.view === "courses"){
     main.appendChild(renderCoursesView());
   } else if(route.view === "map"){
-    main.appendChild(renderMapView());
+    main.appendChild(renderMapView(route.courseId));
   } else if(route.view === "station-path"){
     main.appendChild(renderStationPathView(getStation(route.stationId)));
   } else if(route.view === "flashcards"){
@@ -211,7 +235,7 @@ function confirmReset(){
     state = defaultState();
     saveState();
     overlay.remove();
-    navigate({ view: "map" });
+    navigate({ view: "courses" });
   });
 }
 
@@ -253,7 +277,7 @@ function renderCoursesView(){
 
     const card = el("div", "course-card");
     card.innerHTML = `
-      <div class="course-card__icon"><span class="icon">${ICONS.topic[course.icon]}</span></div>
+      <div class="course-card__icon"><span class="icon">${resolveIcon(course.icon)}</span></div>
       <div class="course-card__code">${course.code}</div>
       <div class="course-card__title">${course.title}</div>
       <div class="course-card__tagline">${course.tagline}</div>
@@ -264,9 +288,9 @@ function renderCoursesView(){
     `;
     const btn = el("button", "btn-primary course-card__btn");
     btn.innerHTML = `${done > 0 ? "Continue" : "Start course"} <span class="icon">${ICONS.arrowRight}</span>`;
-    btn.addEventListener("click", () => navigate({ view: "map" }));
+    btn.addEventListener("click", () => navigate({ view: "map", courseId: course.id }));
     card.appendChild(btn);
-    card.addEventListener("click", (e) => { if(e.target !== btn && !btn.contains(e.target)) navigate({ view: "map" }); });
+    card.addEventListener("click", (e) => { if(e.target !== btn && !btn.contains(e.target)) navigate({ view: "map", courseId: course.id }); });
     grid.appendChild(card);
   });
 
@@ -274,7 +298,8 @@ function renderCoursesView(){
   return wrap;
 }
 
-function renderMapView(){
+function renderMapView(courseId){
+  const course = getCourse(courseId) || COURSES[0];
   const wrap = el("div");
   const backLink = el("button", "back-to-courses");
   backLink.innerHTML = `<span class="icon">${ICONS.arrowLeft}</span>All courses`;
@@ -284,12 +309,12 @@ function renderMapView(){
   const hero = el("div", "map-hero");
   hero.innerHTML = `
     <span class="icon">${ICONS.map}</span>
-    <h1>The Environmental Physiology Trail</h1>
+    <h1>The ${course.title} Trail</h1>
     <p>Twelve stations, one winding path. Each station is broken into short study parts, flashcards then a quick quiz, before a final exam unlocks the next station.</p>
   `;
   wrap.appendChild(hero);
-  wrap.appendChild(renderTrail());
-  wrap.appendChild(renderBadgeShelf());
+  wrap.appendChild(renderTrail(course.stations));
+  wrap.appendChild(renderBadgeShelf(course.stations));
   return wrap;
 }
 
@@ -299,7 +324,7 @@ const TRAIL_POINTS = [
   {x: 18, y: 63}, {x: 42, y: 71}, {x: 68, y: 68}, {x: 85, y: 78},
 ];
 
-function renderTrail(){
+function renderTrail(stations){
   const wrap = el("div", "map-wrap");
   const rowHeight = 92;
   const svgHeight = TRAIL_POINTS.length * rowHeight * 0.62;
@@ -341,9 +366,9 @@ function renderTrail(){
   nodesLayer.style.height = `${svgHeight * 0.36}px`;
 
   TRAIL_POINTS.forEach((p, i) => {
-    const station = STATIONS[i];
+    const station = stations[i];
     if(!station) return;
-    const unlocked = isStationUnlocked(i);
+    const unlocked = isStationUnlocked(stations, i);
     const done = isStationDone(station.id);
     const isCurrent = unlocked && !done;
 
@@ -372,11 +397,11 @@ function renderTrail(){
   return wrap;
 }
 
-function renderBadgeShelf(){
+function renderBadgeShelf(stations){
   const wrap = el("div", "badge-shelf");
   wrap.innerHTML = `<h2><span class="icon">${ICONS.trophy}</span>Badge Collection</h2>`;
   const grid = el("div", "badge-grid");
-  STATIONS.forEach(s => {
+  stations.forEach(s => {
     const done = isStationDone(s.id);
     const slot = el("div", "badge-slot");
     slot.innerHTML = `${ICONS.badgeFrame(ICONS.topic[s.icon], !done)}
@@ -397,7 +422,7 @@ function renderStationPathView(station){
   const topbar = el("div", "lesson-topbar");
   const back = el("button", "back-btn");
   back.innerHTML = `<span class="icon">${ICONS.arrowLeft}</span>Trail map`;
-  back.addEventListener("click", () => navigate({ view: "map" }));
+  back.addEventListener("click", () => navigate({ view: "map", courseId: courseIdForStation(station.id) }));
   topbar.appendChild(back);
   topbar.appendChild(el("div", "lesson-topbar__title", `STATION ${station.order}`));
   wrap.appendChild(topbar);
@@ -939,7 +964,7 @@ function renderExamResults(station, rt){
 
   const mapBtn = el("button", "btn-primary");
   mapBtn.innerHTML = `<span class="icon">${ICONS.map}</span>Back to trail`;
-  mapBtn.addEventListener("click", () => navigate({ view: "map" }));
+  mapBtn.addEventListener("click", () => navigate({ view: "map", courseId: courseIdForStation(station.id) }));
   actions.appendChild(mapBtn);
 
   return card;
