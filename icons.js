@@ -197,87 +197,91 @@ const ICONS = {
     </svg>`,
 
     /* ---------- Sport Nutrition course topic glyphs ---------- */
+    /* Same geometric, minimal-detail style as the topics above: a clean
+       primary shape with one or two simple interior details, no literal
+       figures or dense multi-segment illustrations. */
 
-    // SN1 Introduction — a runner in motion
+    // SN1 Introduction — a stopwatch
     sn_intro: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="19" cy="7" r="2.6" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M18 10 14 14l2 5-4 7M18 10l5 3-2 6M14 14l5 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M6 26h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".6"/>
+      <circle cx="16" cy="18" r="10" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M16 18V12.5M16 18l4.5 2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 4h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M16 4v3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M23.5 8.5l1.8-1.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
     </svg>`,
 
-    // SN2 Energy Systems — a lightning bolt inside a gauge
+    // SN2 Energy Systems — a lightning bolt in a circle
     sn_energy: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="17" r="10.5" stroke="currentColor" stroke-width="1.6"/>
-      <path d="M17.5 9 12 18.5h4.5L15 25l7-10h-5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <circle cx="16" cy="17" r="10.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M17.5 9.5 12 18.5h4.5L15 25l7-10h-5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
     </svg>`,
 
-    // SN3 Carbohydrates — a wheat stalk
+    // SN3 Carbohydrates — a glucose ring (simplified molecule)
     sn_carbs: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 6v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <path d="M16 9 12 7M16 9l4-2M16 13l-4-2M16 13l4-2M16 17l-4-2M16 17l4-2M16 21l-4-2M16 21l4-2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-      <path d="M16 25c0-2 1.6-3 3.4-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".7"/>
+      <path d="M16 5 25 10.5v11L16 27 7 21.5v-11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="16" cy="16" r="1.4" fill="currentColor"/>
+      <path d="M16 5v5.5M25 10.5l-5.3 3M25 21.5l-5.3-3M16 27v-5.5M7 21.5l5.3-3M7 10.5l5.3 3" stroke="currentColor" stroke-width="1.1" opacity=".55" stroke-linecap="round"/>
     </svg>`,
 
-    // SN4 Protein — a flexed bicep / arm
+    // SN4 Protein — a simple linked amino-acid chain
     sn_protein: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 24V16c0-4 2.5-7 6-7 2 0 3 1.3 3 2.7 0 2-2 2.6-2 4.8 0 3 3 3 3 6.5v1" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-      <path d="M9 24h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="15.5" cy="10.5" r="1.3" fill="currentColor"/>
+      <circle cx="8" cy="21" r="3.4" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="17" cy="12" r="3.7" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="25" cy="20.5" r="3" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M10.7 18.7 14.3 14.7M19.7 14.2 22.6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
     </svg>`,
 
-    // SN5 Fats/Lipids — an oil droplet with a highlight
+    // SN5 Fats/Lipids — an oil droplet
     sn_fats: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 5c4.5 6 7.5 10.3 7.5 14A7.5 7.5 0 0 1 8.5 19c0-3.7 3-8 7.5-14Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-      <path d="M12.5 19a3.5 3 0 0 1 3-3.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".65"/>
+      <path d="M16 5c4.5 6 7.5 10.3 7.5 14A7.5 7.5 0 0 1 8.5 19c0-3.7 3-8 7.5-14Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12.3 19.2a3.7 3.2 0 0 1 3.2-3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".6"/>
     </svg>`,
 
     // SN6 Vitamins & Antioxidants — a two-tone capsule
     sn_vitamins: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="6.5" y="12.5" width="19" height="8" rx="4" transform="rotate(-32 6.5 12.5)" stroke="currentColor" stroke-width="1.6"/>
-      <path d="M14 10.5l4 8" stroke="currentColor" stroke-width="1.4"/>
-      <circle cx="11" cy="11.6" r="1" fill="currentColor"/>
-      <circle cx="21.5" cy="20.5" r="1" fill="currentColor"/>
+      <rect x="5.5" y="12.8" width="21" height="8.4" rx="4.2" transform="rotate(-30 5.5 12.8)" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M14.3 9.8l4.6 9.5" stroke="currentColor" stroke-width="1.5"/>
     </svg>`,
 
-    // SN7 Minerals & Hydration — a water droplet with an ion mark
+    // SN7 Minerals & Hydration — a droplet with an electrolyte mark
     sn_minerals: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 6c4 5 7 9 7 12.5A7 7 0 0 1 9 18.5C9 15 12 11 16 6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M13.3 18h4.4M15.5 15.8v4.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <path d="M13 18h6M16 15v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
     </svg>`,
 
-    // SN8 Nutrient Timing — a clock with a fork hand
+    // SN8 Nutrient Timing — a clean clock face
     sn_timing: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="17" r="10" stroke="currentColor" stroke-width="1.6"/>
-      <path d="M16 17V10M16 17l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M13 4h1.4v4.6H13zM15 4h1.4v4.6H15zM17 4h1.4v4.6H17z" fill="currentColor" opacity=".8"/>
+      <circle cx="16" cy="17" r="10.5" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M16 17V11M16 17l4.8 2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 4.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
     </svg>`,
 
     // SN9 Sports Supplements — a shaker bottle
     sn_supplements: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 6h8v4l2.5 3.5V25a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2V13.5L12 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M12 6h8v4l2.5 3.5V25a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2V13.5L12 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
       <path d="M10.5 17h11" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M12 6h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M12 6h8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
     </svg>`,
 
     // SN10 Doping & Ethics — a shield with a prohibited mark
     sn_doping: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 4 26 8v8c0 7-4.5 11-10 13-5.5-2-10-6-10-13V8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-      <circle cx="16" cy="15.5" r="4.2" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M13.2 12.7l5.6 5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M16 4 26 8v8c0 7-4.5 11-10 13-5.5-2-10-6-10-13V8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <circle cx="16" cy="15.5" r="4.3" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M13.1 12.6l5.8 5.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
     </svg>`,
 
-    // SN11 Nutrition for Specific Sports — a medal/ribbon
+    // SN11 Nutrition for Specific Sports — a medal
     sn_specific: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11 4 16 13 21 4" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
-      <circle cx="16" cy="19.5" r="7" stroke="currentColor" stroke-width="1.7"/>
-      <path d="M16 15.5 17.3 18.3 20.3 18.7 18.2 20.8 18.7 23.8 16 22.3 13.3 23.8 13.8 20.8 11.7 18.7 14.7 18.3Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>
+      <path d="M12 4 16 12 20 4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="16" cy="20" r="7.2" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M16 16.3 17.3 19 20.2 19.4 18.1 21.4 18.6 24.3 16 22.9 13.4 24.3 13.9 21.4 11.8 19.4 14.7 19Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
     </svg>`,
 
     // SN12 Weight Management — a bathroom scale
     sn_weight: `<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="10" width="22" height="16" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
-      <circle cx="16" cy="18" r="5" stroke="currentColor" stroke-width="1.4"/>
-      <path d="M16 18 18.4 15.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      <rect x="5" y="10" width="22" height="16" rx="2.5" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="16" cy="18" r="5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M16 18 18.4 15.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
     </svg>`,
   },
 
